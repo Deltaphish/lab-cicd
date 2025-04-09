@@ -1,0 +1,23 @@
+features:
+  - buildpack-stack=ubuntu-22
+ingress:
+  rules:
+    - component:
+        name: joakim-lab-cicd
+      match:
+        path:
+          prefix: /
+name: joakim-cicd-app
+region: fra 
+services:
+  - health_check:
+      http_path: /
+    http_port: 80
+    image:
+      registry: deltaphish 
+      registry_type: GHCR
+      repository: lab-cicd
+      tag: latest
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    name: deltaphish-lab-cicd
